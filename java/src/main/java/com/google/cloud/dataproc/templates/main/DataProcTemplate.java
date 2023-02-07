@@ -18,14 +18,10 @@ package com.google.cloud.dataproc.templates.main;
 import com.google.cloud.dataproc.templates.BaseTemplate;
 import com.google.cloud.dataproc.templates.BaseTemplate.TemplateName;
 import com.google.cloud.dataproc.templates.bigquery.BigQueryToGCS;
-import com.google.cloud.dataproc.templates.databases.CassandraToBQ;
-import com.google.cloud.dataproc.templates.databases.CassandraToGCS;
 import com.google.cloud.dataproc.templates.databases.RedshiftToGCS;
 import com.google.cloud.dataproc.templates.databases.SpannerToGCS;
-import com.google.cloud.dataproc.templates.dataplex.DataplexGCStoBQ;
 import com.google.cloud.dataproc.templates.gcs.*;
 import com.google.cloud.dataproc.templates.general.GeneralTemplate;
-import com.google.cloud.dataproc.templates.hbase.HbaseToGCS;
 import com.google.cloud.dataproc.templates.hive.HiveToBigQuery;
 import com.google.cloud.dataproc.templates.hive.HiveToGCS;
 import com.google.cloud.dataproc.templates.jdbc.JDBCToBigQuery;
@@ -34,9 +30,6 @@ import com.google.cloud.dataproc.templates.jdbc.JDBCToSpanner;
 import com.google.cloud.dataproc.templates.kafka.KafkaToBQ;
 import com.google.cloud.dataproc.templates.kafka.KafkaToGCS;
 import com.google.cloud.dataproc.templates.kafka.KafkaToPubSub;
-import com.google.cloud.dataproc.templates.pubsub.PubSubToBQ;
-import com.google.cloud.dataproc.templates.pubsub.PubSubToBigTable;
-import com.google.cloud.dataproc.templates.pubsub.PubSubToGCS;
 import com.google.cloud.dataproc.templates.s3.S3ToBigQuery;
 import com.google.cloud.dataproc.templates.snowflake.SnowflakeToGCS;
 import com.google.cloud.dataproc.templates.util.PropertyUtil;
@@ -68,9 +61,6 @@ public class DataProcTemplate {
           .put(TemplateName.WORDCOUNT, (args) -> new WordCount())
           .put(TemplateName.HIVETOGCS, (args) -> new HiveToGCS())
           .put(TemplateName.HIVETOBIGQUERY, (args) -> new HiveToBigQuery())
-          .put(TemplateName.PUBSUBTOBQ, (args) -> new PubSubToBQ())
-          .put(TemplateName.PUBSUBTOBIGTABLE, (args) -> new PubSubToBigTable())
-          .put(TemplateName.PUBSUBTOGCS, (args) -> new PubSubToGCS())
           .put(TemplateName.REDSHIFTTOGCS, RedshiftToGCS::of)
           .put(TemplateName.GCSTOBIGQUERY, (args) -> new GCStoBigquery())
           .put(TemplateName.GCSTOBIGTABLE, (args) -> new GCStoBigTable())
@@ -80,17 +70,13 @@ public class DataProcTemplate {
           .put(TemplateName.SPANNERTOGCS, SpannerToGCS::of)
           .put(TemplateName.JDBCTOBIGQUERY, (args) -> new JDBCToBigQuery())
           .put(TemplateName.KAFKATOPUBSUB, (args) -> new KafkaToPubSub())
-          .put(TemplateName.CASSANDRATOBQ, CassandraToBQ::of)
-          .put(TemplateName.CASSANDRATOGCS, CassandraToGCS::of)
           .put(TemplateName.JDBCTOGCS, JDBCToGCS::of)
           .put(TemplateName.JDBCTOSPANNER, JDBCToSpanner::of)
-          .put(TemplateName.HBASETOGCS, (args) -> new HbaseToGCS())
           .put(TemplateName.KAFKATOBQ, (args) -> new KafkaToBQ())
           .put(TemplateName.KAFKATOGCS, (args) -> new KafkaToGCS())
           .put(TemplateName.GCSTOJDBC, GCSToJDBC::of)
           .put(TemplateName.GCSTOSPANNER, GCSToSpanner::of)
           .put(TemplateName.GENERAL, GeneralTemplate::of)
-          .put(TemplateName.DATAPLEXGCSTOBQ, DataplexGCStoBQ::of)
           .put(TemplateName.SNOWFLAKETOGCS, SnowflakeToGCS::of)
           .build();
   private static final String TEMPLATE_NAME_LONG_OPT = "template";
